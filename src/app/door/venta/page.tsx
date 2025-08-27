@@ -2,9 +2,8 @@
 import { useEffect, useState } from 'react';
 import { createDoorSale, fetchDoorSales } from '@/lib/data';
 import type { DoorSale } from '@/types';
-import { CreditCard, DollarSign, TrendingUp, User, Package, Calendar, Loader2, Plus } from 'lucide-react';
+import { CreditCard, DollarSign, User, Package, Calendar, Plus } from 'lucide-react';
 import Toast from '@/components/Toast';
-import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function VentaPage() {
   const [rows, setRows] = useState<DoorSale[]>([]);
@@ -19,7 +18,7 @@ export default function VentaPage() {
     (async () => {
       try {
         setRows(await fetchDoorSales());
-      } catch (error) {
+      } catch {
         setToast({ message: 'Error al cargar ventas', type: 'error' });
       }
     })();
@@ -45,7 +44,7 @@ export default function VentaPage() {
         message: `Venta registrada: ${ins.fullName} - $${ins.finalPrice?.toLocaleString()}`, 
         type: 'success' 
       });
-    } catch (error) {
+    } catch {
       setToast({ message: 'No se pudo guardar la venta.', type: 'error' });
     } finally {
       setBusy(false);
@@ -54,9 +53,6 @@ export default function VentaPage() {
 
   const [cashAmount, setCashAmount] = useState('');
   const [showCashCalculator, setShowCashCalculator] = useState(false);
-  
-  const total = rows.reduce((a, x) => a + (x.finalPrice || 0), 0);
-  const totalTickets = rows.reduce((a, x) => a + x.quantity, 0);
 
   return (
     <div className="space-y-6 animate-fade-in">

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { DoorOpen, TicketIcon, CreditCardIcon, TrendingUpIcon, UsersIcon, CalendarIcon } from 'lucide-react';
+import { DoorOpen, TicketIcon, CreditCardIcon } from 'lucide-react';
 
 export default function HomePage() {
   return (

@@ -18,7 +18,7 @@ export default function PreventaPage() {
     (async () => {
       try { 
         setRows(await fetchPreorders()); 
-      } catch (error) {
+      } catch {
         setToast({ message: 'Error al cargar preventas', type: 'error' });
       } finally { 
         setLoading(false); 
@@ -58,7 +58,7 @@ export default function PreventaPage() {
         message: `Entrada actualizada: ${item.fullName}`, 
         type: 'success' 
       });
-    } catch (e) {
+    } catch {
       setRows(prev);
       setToast({ 
         message: 'No se pudo actualizar. Reintentá.', 
